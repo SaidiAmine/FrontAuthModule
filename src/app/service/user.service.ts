@@ -24,6 +24,7 @@ export class UserService {
   private adminUrl: string;
   private meUrl: string;
   private logoutUrl: string;
+  private registerUrl: string;
 
   //
   private notification = new Subject<boolean>();
@@ -40,6 +41,7 @@ export class UserService {
       this.currentLoggedUrl = 'http://localhost:8080/currentLoggedUser';
       this.meUrl = 'http://localhost:8080/me';
       this.logoutUrl = 'http://localhost:8080/logout';
+      this.registerUrl = 'http://localhost:8080/user/registration';
       this.checkUserIsActive();
     }
     return UserService.instance;
@@ -135,5 +137,8 @@ export class UserService {
     this.notification.next(this.getIsLogged());
   }
 
+  public registration(user: User) {
+    return this.http.post(this.registerUrl, user);
+  }
 
 }
